@@ -1,0 +1,77 @@
+@model JobApplicationPortal.ViewModels.JobPostingViewModel
+
+@{
+    ViewData["Title"] = "Edit Job Posting";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">@ViewData["Title"]</h6>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" maxlength="100" placeholder="Enter job title" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="8" maxlength="1000"
+                          placeholder="Enter detailed job description"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+                <small id="charCount" class="form-text text-muted"></small>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            // Live character count for Description field
+            const $description = $('#Description');
+            const $counter = $('#charCount');
+
+            function updateCharCount() {
+                const length = $description.val().length;
+                $counter.text(length + ' characters');
+            }
+
+            $description.on('input', updateCharCount);
+            updateCharCount(); // Initialize on page load
+
+            // Unsaved changes warning
+            let isDirty = false;
+
+            $('form :input').on('input change', function () {
+                isDirty = true;
+                window.onbeforeunload = function () {
+                    return 'You have unsaved changes. Are you sure you want to leave this page?';
+                };
+            });
+
+            $('form').on('submit', function () {
+                isDirty = false;
+                window.onbeforeunload = null;
+            });
+        });
+    </script>
+}

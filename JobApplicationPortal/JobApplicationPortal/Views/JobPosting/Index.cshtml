@@ -1,0 +1,41 @@
+@model IEnumerable<JobApplicationPortal.Models.JobApplication>
+
+@{
+    ViewData["Title"] = "Job Applications";
+}
+
+<h1>Job Applications</h1>
+
+<p>
+    <a asp-action="Create">Create New Job Posting</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Job Title</th>
+            <th>Applicant Name</th>
+            <th>Application Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.JobPosting.Title</td>
+                <td>@item.User.FirstName @item.User.LastName</td>
+                <td>@item.ApplicationDate.ToString("d")</td>
+                <td>@item.Status</td>
+                <td>
+                    <form asp-controller="JobApplication" asp-action="UpdateStatus" method="post">
+                        <input type="hidden" name="applicationId" value="@item.Id" />
+                        <button type="submit" name="status" value="Approved" class="btn btn-success">Approve</button>
+                        <button type="submit" name="status" value="Rejected" class="btn btn-danger">Reject</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

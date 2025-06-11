@@ -22,7 +22,7 @@ namespace JobApplicationPortal.Controllers
         [Authorize(Roles = "Recruiter")]
         public async Task<IActionResult> Applications(int jobId)
         {
-            var applications = await _jobService.GetApplicationForRecruiterAsync(_userManager.GetUserId(User));
+            var applications = await _jobService.GetApplicationsForRecruiterAsync(_userManager.GetUserId(User));
             return View(applications);
         }
         [HttpPost]

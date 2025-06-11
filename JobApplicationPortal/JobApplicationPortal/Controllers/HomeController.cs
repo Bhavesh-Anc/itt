@@ -1,3 +1,4 @@
+using JobApplicationPortal.Models;
 using JobApplicationPortal.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -23,9 +24,9 @@ namespace JobApplicationPortal.Controllers
             {
                 var userId = _userManager.GetUserId(User);
                 var jobs = await _jobService.GetUserApplicationsAsync(userId);
-                return View(jobs);
+                return View(jobs ?? new List<JobPosting>());
             }
-            return View();
+            return View(new List<JobPosting>());
         }
     }
 }

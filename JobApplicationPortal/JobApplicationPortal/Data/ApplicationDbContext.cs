@@ -17,7 +17,7 @@ namespace JobApplicationPortal.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<JobApplicationPortal>()
+            builder.Entity<JobApplication>()
                 .HasIndex(ja => new { ja.UserId, ja.JobPostingId })
                 .IsUnique();
             builder.Entity<JobPosting>()

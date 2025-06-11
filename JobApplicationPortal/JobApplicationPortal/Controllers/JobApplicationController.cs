@@ -44,7 +44,7 @@ namespace JobApplicationPortal.Controllers
         public async Task<IActionResult> Apply(int jobId)
         {
             var userId = _userManager.GetUserId(User);
-            var result = await _jobService.ApplyForJobAsync(jobId, userId);
+            await _jobService.ApplyForJobAsync(jobId, userId);
             return RedirectToAction(nameof(MyApplications));
         }
     }

@@ -14,9 +14,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+// Register Identity and include default UI
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+// Add Razor Pages (required for default Identity UI)
+builder.Services.AddRazorPages();
+
 builder.Services.AddControllersWithViews();
 
 // Register services
@@ -46,6 +51,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// Map Razor Pages (required for default Identity UI)
 app.MapRazorPages();
 
 // Seed roles

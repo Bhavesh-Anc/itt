@@ -2,7 +2,9 @@ using JobApplicationPortal.Data;
 using JobApplicationPortal.Models;
 using JobApplicationPortal.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -96,7 +96,7 @@ namespace JobApplicationPortal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            await _jobService.DeleteJobPostingAsync(jobPosting);
+            await _jobService.DeleteJobPostingAsync(id);
             return RedirectToAction(nameof(Index));
         }
     }

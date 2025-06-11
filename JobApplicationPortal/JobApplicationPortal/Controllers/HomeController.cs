@@ -20,13 +20,13 @@ namespace JobApplicationPortal.Controllers
 
         public async Task<IActionResult> Index()
         {
-            if(User.Identity.IsAuthenticated)
+            string userId = null;
+            if (User.Identity.IsAuthenticated)
             {
-                var userId = _userManager.GetUserId(User);
-                var jobs = await _jobService.GetUserApplicationsAsync(userId);
-                return View(jobs ?? new List<JobPosting>());
+                userId = _userManager.GetUserId(User);
             }
-            return View(new List<JobPosting>());
+            var jobs = await _jobService.GetAvailableJobPostingsAsync(userId);
+            return View(jobs ?? new List<JobPosting>());
         }
     }
 }

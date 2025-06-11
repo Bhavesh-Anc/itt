@@ -48,7 +48,7 @@ namespace JobApplicationPortal.Controllers
         }
         public async Task<IActionResult> Edit(int id)
         {
-            var jobPosting = await _jobService.GetJobPostingByIdAsync(id);
+            var jobPosting = await _jobService.GetJobPostingAsync(id);
             if (jobPosting == null)
             {
                 return NotFound();
@@ -71,7 +71,7 @@ namespace JobApplicationPortal.Controllers
             }
             if (ModelState.IsValid)
             {
-                var jobPosting = await _jobService.GetJobPostingByIdAsync(id);
+                var jobPosting = await _jobService.GetJobPostingAsync(id);
                 if (jobPosting == null)
                 {
                     return NotFound();
@@ -85,7 +85,7 @@ namespace JobApplicationPortal.Controllers
         }
         public async Task<IActionResult> Delete(int id)
         {
-            var jobPosting = await _jobService.GetJobPostingByIdAsync(id);
+            var jobPosting = await _jobService.GetJobPostingAsync(id);
             if (jobPosting == null)
             {
                 return NotFound();

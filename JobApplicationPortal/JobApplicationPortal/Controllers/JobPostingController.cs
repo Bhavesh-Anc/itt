@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace JobApplicationPortal.Controllers
 {
-    [Authorize(Roles = "Recruiter")]
+    [Authorize(Roles = "Recruiter,Admin")]
     public class JobPostingController : Controller
     {
         private readonly IJobService _jobService;

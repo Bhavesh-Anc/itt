@@ -19,15 +19,16 @@ namespace JobApplicationPortal.Controllers
             _jobService = jobService;
             _userManager = userManager;
         }
-        [Authorize(Roles = "Recruiter")]
+
+        [Authorize(Roles = "Recruiter,Admin")]
         public async Task<IActionResult> Applications(int jobId)
         {
             var applications = await _jobService.GetApplicationsForRecruiterAsync(_userManager.GetUserId(User));
             return View(applications);
         }
-        [HttpPost]
-        [Authorize(Roles = "Recruiter")]
 
+        [HttpPost]
+        [Authorize(Roles = "Recruiter,Admin")]
         public async Task<IActionResult> UpdateStatus(int applicationId, ApplicationStatus status)
         {
             await _jobService.UpdateApplicationStatusAsync(applicationId, status);
@@ -40,7 +41,9 @@ namespace JobApplicationPortal.Controllers
             var applications = await _jobService.GetUserApplicationsAsync(userId);
             return View(applications);
         }
+
         [HttpPost]
+        [Authorize(Roles = "Employee,Admin")]
         public async Task<IActionResult> Apply(int jobId)
         {
             var userId = _userManager.GetUserId(User);

@@ -1,3 +1,4 @@
+using JobApplicationPortal.Models;
 namespace JobApplicationPortal.ViewModels
 {
     public class JobApplicationViewModel

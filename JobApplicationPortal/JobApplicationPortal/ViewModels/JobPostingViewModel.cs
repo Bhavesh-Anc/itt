@@ -1,14 +1,10 @@
-using system.ComponentModel.DataAnnotations;
+using JobApplicationPortal.Models;
 namespace JobApplicationPortal.ViewModels
 {
-    public class JobPostingViewModel
+    public class JobApplicationViewModel
     {
-        public int Id { get; set; }
-
-        [Required(ErrorMessage = "Job title is required.")]
-        public string Title { get; set; }
-
-        [Required(ErrorMessage = "Job description is required.")]
-        public string Description { get; set; }
+        public int JobPostingId { get; set; }
+        public string JobTitle { get; set; }
+        public ApplicationStatus Status { get; set; }
     }
 }
